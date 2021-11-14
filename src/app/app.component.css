@@ -1,0 +1,13 @@
+   
+    body{font-family: 'Manrope', sans-serif;  font-size: 13px;}
+    .valide {
+  background-color: #5BE881;
+}
+.rejected {
+  background-color: #FF0000;
+}
+.on-validation {
+  background-color: #FDB64D;
+}
+
+ 

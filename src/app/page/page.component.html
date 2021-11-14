@@ -1,0 +1,121 @@
+
+    <!-------------- table ------------>
+    <div class="container-xl" style="padding-top: 12px;">
+        <div class="table-responsive" style="background-color: white;  box-shadow: 5px 1px 5px 5px whitesmoke;border: 2px solid white;border-radius: 11px;">
+            <div class="table-wrapper" >
+                        <table class="table table-hover" id="table" >
+                            <thead >
+                                <tr class="font-weight-bold">
+                                    <th >ID</th>
+                                    <th>Date de création</th>
+                                    <th>Etat</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Nom d'utilisation</th>
+                                    <th>Matricule</th>
+                                    <th >Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let user of users; let i = index" [attr.id]="user.id"nid="myTable" >
+                              <tr>
+                                <td>{{user.id}}</td>
+                                <td>{{user.createdDate | date:'MM/dd/yyyy'	}}</td>
+                                <td ><p style="margin-bottom: 0rem;" [ngClass]="{'valide': user.status === 'Validé', 'on-validation': user.status === 'En validation','rejected' : user.status === 'Rejeté' }"> {{user.status}}</p></td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td>{{user.userName}}</td>
+                                <td>{{user.registrationNumber}}</td>
+                                <td><a style="cursor:pointer" (click)="deleteRow(user.id)"><i class="material-icons">delete</i></a></td>
+                          </tr>
+                              
+                            </tbody>
+                        </table>
+            </div>
+        </div>
+        <br>
+  
+        <!-------------- buttom ajouter --------------------------------->
+        <div class="table-title" style="background-color: white;  box-shadow: 5px 1px 5px 5px whitesmoke;padding-top: 2px;border: 2px solid white;border-radius: 11px;">
+            <div class="d-flex align-items-end flex-column" style="height: 50px;">
+               <div class="p-2">
+                  <a href="#addModal" class="btn btn-warning rounded-pill btn-sm" role="button" aria-pressed="true" data-toggle="modal" >
+                        <span  style="padding-left: 20px;padding-right: 20px;font-size: 14px;"> Ajouter utilisateur</span>
+                  </a>
+               </div>
+            </div>
+        </div>
+      </div>
+  
+      
+      <!-------------- Add  Modal HTML ------------------------------------->
+      <div id="addModal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form  id="book-form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Ajouter d'utilisateur</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                          <div class="row row-cols-lg-12 g-3 align-items-center needs-validation" novalidate>
+  
+                            <div class="col-4">
+                              <label class="visually-hidden" for="nom">Nom</label>
+                              <input type="text" class="input-sm form-control" id="nom" [(ngModel)]='nom'  name="nome"  required>
+                              <div class="invalid-feedback">Name can't be blank</div>
+                              <div class="valid-feedback">Looks good!</div>
+                            </div>
+                          
+                            <div class="col-4">
+                              <label class="visually-hidden" for="prenom">Prénom</label>
+                              <input type="text" class="form-control" id="prenom" [(ngModel)]='prenom'  name="prenom" required>
+                              <div class="invalid-feedback">Please provide a valid value.</div>
+                              <div class="valid-feedback">Looks good!</div>
+                            </div>
+  
+                            <div class="col-4">
+                              <label class="visually-hidden" for="etat">Etat</label>
+                              <select type="text" class="form-control" id="etat" [(ngModel)]='etat'  name="etat" required>
+                                <option selected disabled>etat</option>
+                                <option value="En validation">En validation</option>
+                                <option value="Validé">Validé</option>
+                                <option value="Rejeté">Rejeté</option>
+                              </select>
+                              <div class="invalid-feedback">Please provide a valid value.</div>
+                              <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            
+                            <div class="col-4">
+                                <label class="visually-hidden" for="utilisateur">Nom d'utilisateur</label>
+                                <input type="text" class="form-control" id="utilisateur" [(ngModel)]='utilisateur'  name="utilisateur" required>
+                                <div class="invalid-feedback">Name can't be blank</div>
+                                <div class="valid-feedback">Looks good!</div>
+                              </div>
+  
+                              <div class="col-4">
+                                <label class="visually-hidden" for="creation">Date de création</label>
+                                <input type="date" class="form-control" id="creation" [(ngModel)]='creation'  name="creation" required>
+                                <div class="invalid-feedback">Please provide a valid value.</div>
+                                <div class="valid-feedback">Looks good!</div>
+                              </div>
+  
+                         </div>
+  
+                            <div class="row row-cols-lg-12 g-3 align-items-center needs-validation" novalidate>
+                                <div class="col-4">
+                                    <label class="visually-hidden" for="matricule">Matricule</label>
+                                    <input type="text" class="form-control" id="matricule" [(ngModel)]='matricule' name="matricule" required>
+                                    <div class="invalid-feedback">Name can't be blank</div>
+                                    <div class="valid-feedback">Looks good!</div>
+                                  </div>
+                                  </div>
+            
+                    </div>
+                    <br>
+                  <div class="modal-footer">
+                     <button type="submit" id="b" (click)="add()" class="btn btn-warning">Enregistrer</button>
+                  </div>
+                </form>
+            </div>
+        </div>
+      </div>
